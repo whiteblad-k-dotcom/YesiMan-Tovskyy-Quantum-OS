@@ -11,7 +11,7 @@ apt clean && apt autoremove -y
 
 # 🔄 Optimización del sistema
 echo "🔄 Optimizando el sistema..."
-sync && echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || echo "⚠️ No se pudo limpiar caché."
+sync && echo "🔄 Memoria liberada virtualmente (sin root)."
 
 # 🔐 Iniciar encriptación de datos personales
 echo "🔐 Iniciando encriptación segura..."

@@ -1,27 +1,29 @@
 #!/bin/bash
+
 echo "🚀 Arrancando YesiMan OS..."
 
-# 🔧 Eliminar bloqueos previos
+# Eliminar bloqueos previos
 echo "🔧 Eliminando bloqueos previos..."
-rm -f /data/data/com.termux/files/usr/var/run/crond.pid 2>/dev/null
+pkill crond 2>/dev/null  # Matar instancias previas de crond
+rm -f /data/data/com.termux/files/usr/var/run/crond.pid
 
-# 🧹 Limpiar caché
+# Limpiar caché del sistema
 echo "🧹 Limpiando caché del sistema..."
-apt clean && apt autoremove -y
-
-# 🔄 Optimización del sistema
-echo "🔄 Optimizando el sistema..."
+apt update && apt upgrade -y
 sync && echo "🔄 Memoria liberada virtualmente (sin root)."
 
-# 🔐 Iniciar encriptación de datos personales
-echo "🔐 Iniciando encriptación segura..."
-openssl enc -aes-256-cbc -pbkdf2 -in archivo -out archivo.enc
-echo "✅ Encriptación completada. Datos protegidos."
+# Iniciar encriptación segura solo si el archivo existe
+ARCHIVO_ENCRIPTAR="$HOME/mi_proyecto/archivo.txt"
+if [[ -f "$ARCHIVO_ENCRIPTAR" ]]; then
+    echo "🔐 Iniciando encriptación segura..."
+    openssl enc -aes-256-cbc -pbkdf2 -in "$ARCHIVO_ENCRIPTAR" -out "$ARCHIVO_ENCRIPTAR.enc"
+    echo "✅ Encriptación completada. Datos protegidos."
+else
+    echo "⚠️ No se encontró el archivo a encriptar. Continuando..."
+fi
 
-# 🛠️ Iniciar servicios en segundo plano
+# Iniciar servicios de fondo
 echo "🛠️ Iniciando servicios de fondo..."
-crond || echo "⚠️ crond ya está en ejecución."
+crond -n &  # Iniciar crond en segundo plano
 
-# ✅ Arranque finalizado
 echo "✅ YesiMan OS está operativo."
-exec bash

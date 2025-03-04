@@ -15,7 +15,7 @@ sync && echo "🔄 Memoria liberada virtualmente (sin root)."
 
 # 🔐 Iniciar encriptación de datos personales
 echo "🔐 Iniciando encriptación segura..."
-openssl enc -aes-256-cbc -pbkdf2 -in ~/mi_proyecto/datos_backup.tar.gz -out ~/mi_proyecto/datos_backup.tar.gz.enc
+openssl enc -aes-256-cbc -pbkdf2 -in archivo -out archivo.enc
 echo "✅ Encriptación completada. Datos protegidos."
 
 # 🛠️ Iniciar servicios en segundo plano
